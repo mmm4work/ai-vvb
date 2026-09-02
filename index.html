@@ -1,33 +1,33 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ИИ-Радар ВВБ</title>
+<title>AI-Атлас</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
 :root{
-  --ground:#F2F5F7; --surface:#FFFFFF; --ink:#1D2023; --muted:#6B7580;
-  --line:#E2E7EB; --accent:#21A038; --accent-ink:#107F2C; --accent-soft:#E4F5E8;
-  --amber:#B8860B; --amber-soft:#F7F0DB; --chip:#EAEFF2; --chip-on:#21A038;
-  --chip-on-ink:#FFFFFF; --hero-glow:rgba(33,160,56,.13); --seg:#E4E9ED;
-  --metric:#107F2C;
-  --sbergrad:linear-gradient(90deg,#FAED00 0%,#8FD52C 28%,#21A038 55%,#04B5C9 100%);
+  --ground:#F3F5F7; --surface:#FFFFFF; --ink:#182028; --muted:#64717D;
+  --line:#DFE5EA; --accent:#0D6E8C; --accent-ink:#0A5670; --accent-soft:#E0EFF4;
+  --amber:#9C6B12; --amber-soft:#F6EEDE; --chip:#E8EDF1; --chip-on:#0D6E8C;
+  --chip-on-ink:#FFFFFF; --hero-glow:rgba(13,110,140,.13); --seg:#E4EAEE;
+  --metric:#0A5670;
+  --brandgrad:linear-gradient(90deg,#0D6E8C 0%,#2C8FA6 45%,#63B7A8 100%);
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --ground:#131619; --surface:#1C2125; --ink:#EAEEF1; --muted:#8E99A3;
-    --line:#2A3138; --accent:#3DDC63; --accent-ink:#6FE28C; --accent-soft:#1C2F22;
-    --amber:#E0B052; --amber-soft:#2E2717; --chip:#232A30; --chip-on:#3DDC63;
-    --chip-on-ink:#0E1A12; --hero-glow:rgba(61,220,99,.10); --seg:#20262B;
-    --metric:#6FE28C;
-    --sbergrad:linear-gradient(90deg,#FAED00 0%,#8FD52C 28%,#21A038 55%,#04B5C9 100%);
+    --ground:#12171B; --surface:#1A2127; --ink:#E8EDF1; --muted:#8C99A5;
+    --line:#28313A; --accent:#4FB6D4; --accent-ink:#7FCDE3; --accent-soft:#132B34;
+    --amber:#D9A552; --amber-soft:#2C2517; --chip:#212A32; --chip-on:#4FB6D4;
+    --chip-on-ink:#0B171C; --hero-glow:rgba(79,182,212,.11); --seg:#1F272E;
+    --metric:#7FCDE3;
+    --brandgrad:linear-gradient(90deg,#4FB6D4 0%,#68C5C0 50%,#9BD9B4 100%);
   }
 }
 :root[data-theme="dark"]{
-  --ground:#131619; --surface:#1C2125; --ink:#EAEEF1; --muted:#8E99A3;
-    --line:#2A3138; --accent:#3DDC63; --accent-ink:#6FE28C; --accent-soft:#1C2F22;
-    --amber:#E0B052; --amber-soft:#2E2717; --chip:#232A30; --chip-on:#3DDC63;
-    --chip-on-ink:#0E1A12; --hero-glow:rgba(61,220,99,.10); --seg:#20262B;
-    --metric:#6FE28C;
-    --sbergrad:linear-gradient(90deg,#FAED00 0%,#8FD52C 28%,#21A038 55%,#04B5C9 100%);
+  --ground:#12171B; --surface:#1A2127; --ink:#E8EDF1; --muted:#8C99A5;
+    --line:#28313A; --accent:#4FB6D4; --accent-ink:#7FCDE3; --accent-soft:#132B34;
+    --amber:#D9A552; --amber-soft:#2C2517; --chip:#212A32; --chip-on:#4FB6D4;
+    --chip-on-ink:#0B171C; --hero-glow:rgba(79,182,212,.11); --seg:#1F272E;
+    --metric:#7FCDE3;
+    --brandgrad:linear-gradient(90deg,#4FB6D4 0%,#68C5C0 50%,#9BD9B4 100%);
 }
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
@@ -37,45 +37,47 @@ body{background:var(--ground); color:var(--ink);
 h1,h2,h3{margin:0; text-wrap:balance;}
 h2{font-size:1.12rem; font-weight:600;}
 a{color:var(--accent);}
-/* герой: радарная панель */
-.hero{margin:0 -16px; padding:0; background:#0E1418; position:relative;
+/* герой: картографическая панель */
+.hero{margin:0 -16px; padding:0; background:#0D1418; position:relative;
   overflow:hidden; border-bottom:3px solid transparent;
-  border-image:var(--sbergrad) 1;}
-.hero::before{content:""; position:absolute; inset:-40% -10% auto auto;
-  width:520px; height:520px; border-radius:50%;
+  border-image:var(--brandgrad) 1;}
+.hero::before{content:""; position:absolute; inset:0;
   background:
-    repeating-radial-gradient(circle at center,
-      rgba(61,220,99,.16) 0 1px, transparent 1px 56px),
-    radial-gradient(circle at center, rgba(61,220,99,.14), transparent 65%);}
-.hero::after{content:""; position:absolute; inset:-40% -10% auto auto;
-  width:520px; height:520px; border-radius:50%;
-  background:conic-gradient(from 0deg, rgba(61,220,99,.22), transparent 70deg);
-  animation:sweep 7s linear infinite;}
-@keyframes sweep{to{transform:rotate(360deg);}}
-@media (prefers-reduced-motion: reduce){ .hero::after{animation:none;} }
+    linear-gradient(rgba(79,182,212,.10) 1px, transparent 1px) 0 0/100% 44px,
+    linear-gradient(90deg, rgba(79,182,212,.10) 1px, transparent 1px) 0 0/44px 100%;
+  mask-image:radial-gradient(120% 100% at 78% 30%, #000 25%, transparent 78%);
+  -webkit-mask-image:radial-gradient(120% 100% at 78% 30%, #000 25%, transparent 78%);}
+.hero::after{content:""; position:absolute; inset:0;
+  background:
+    radial-gradient(circle at 78% 26%, rgba(104,197,192,.55) 0 3px, transparent 4px),
+    radial-gradient(circle at 62% 52%, rgba(155,217,180,.45) 0 2.5px, transparent 4px),
+    radial-gradient(circle at 88% 62%, rgba(79,182,212,.5) 0 2.5px, transparent 4px),
+    radial-gradient(circle at 70% 14%, rgba(79,182,212,.35) 0 2px, transparent 3px),
+    radial-gradient(circle at 92% 34%, rgba(155,217,180,.35) 0 2px, transparent 3px),
+    radial-gradient(140% 120% at 82% 34%, rgba(13,110,140,.20), transparent 62%);}
 .hero .inner{max-width:788px; margin:0 auto; padding:36px 16px 26px;
   display:flex; flex-direction:column; gap:12px; position:relative; z-index:1;}
-.brand{font-weight:700; color:#F2F6F4;
+.brand{font-weight:700; color:#F1F5F6;
   font-size:clamp(1.8rem,6.4vw,2.6rem); letter-spacing:-.01em; line-height:1.08;}
-.brand .bank{background:var(--sbergrad); -webkit-background-clip:text;
+.brand .bank{background:var(--brandgrad); -webkit-background-clip:text;
   background-clip:text; color:transparent;}
 .heroline{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
 .weektag{font-family:"JetBrains Mono",monospace; font-size:.78rem;
-  color:#9FB3AC; background:rgba(255,255,255,.07); border-radius:6px; padding:3px 9px;}
+  color:#9AAAB2; background:rgba(255,255,255,.07); border-radius:6px; padding:3px 9px;}
 .demo{font-size:.7rem; font-weight:600; letter-spacing:.06em;
-  color:#E8C877; background:rgba(232,200,119,.12); border-radius:6px;
+  color:#E3C27E; background:rgba(227,194,126,.12); border-radius:6px;
   padding:3px 9px; text-transform:uppercase;}
-.hero p{margin:0; color:#AEBDB7; max-width:56ch;}
+.hero p{margin:0; color:#AAB9C0; max-width:56ch;}
 .steps{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:6px;}
 @media (max-width:520px){ .steps{grid-template-columns:1fr;} }
 .steps a{display:flex; flex-direction:column; gap:3px; text-decoration:none;
   background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);
   border-radius:14px; padding:12px 14px; transition:border-color .15s, background .15s;}
-.steps a:hover{border-color:var(--accent); background:rgba(61,220,99,.08);}
+.steps a:hover{border-color:var(--accent); background:rgba(79,182,212,.09);}
 .steps .n{font-family:"JetBrains Mono",monospace; font-size:.7rem;
-  color:#3DDC63; letter-spacing:.08em;}
-.steps .t{font-weight:600; color:#F2F6F4; font-size:.95rem;}
-.steps .sub{font-size:.8rem; color:#9FB3AC;}
+  color:#68C5C0; letter-spacing:.08em;}
+.steps .t{font-weight:600; color:#F1F5F6; font-size:.95rem;}
+.steps .sub{font-size:.8rem; color:#9AAAB2;}
 section{margin-top:34px;}
 .sechead{display:flex; align-items:baseline; justify-content:space-between;
   gap:10px; margin-bottom:12px;}
@@ -168,6 +170,9 @@ ul.effl{margin:0; padding:0; display:flex; flex-direction:column; gap:5px;}
 .case .srcline{grid-column:1/-1; font-size:.82rem; color:var(--muted);
   border-top:1px dashed var(--line); padding-top:10px;}
 .nb{color:var(--amber); font-weight:600;}
+.legal{margin-top:16px; padding-top:14px; border-top:1px solid var(--line);
+  display:flex; flex-direction:column; gap:9px; font-size:.78rem; line-height:1.5;}
+.legal b{color:var(--ink); font-weight:600;}
 .empty{color:var(--muted); font-size:.92rem; padding:14px 0;}
 footer{margin-top:44px; font-size:.82rem; color:var(--muted);
   border-top:1px solid var(--line); padding-top:14px;}
@@ -177,12 +182,12 @@ footer{margin-top:44px; font-size:.82rem; color:var(--muted);
 
 <div class="wrap">
 <div class="hero"><div class="inner">
-  <div class="brand">ИИ-Радар <span class="bank">ВВБ</span></div>
+  <div class="brand">AI-<span class="bank">Атлас</span></div>
   <div class="heroline">
     <span class="weektag">неделя 25.08 — 02.09.2026</span>
   </div>
-  <p>Радар держит в поле зрения внедрения искусственного интеллекта в мире
-  и в России — и раскладывает их по девяти регионам и их отраслям.</p>
+  <p>Карта внедрений искусственного интеллекта: что происходит в мире и в
+  России — и как это ложится на девять регионов и их отрасли.</p>
   <div class="steps">
     <a href="#news"><span class="n">ШАГ 1</span><span class="t">Неделя в ИИ</span>
       <span class="sub">главные события: бизнес, государство, наука</span></a>
@@ -413,8 +418,8 @@ footer{margin-top:44px; font-size:.82rem; color:var(--muted);
 
 <footer>
   <div style="display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; margin-bottom:8px;">
-    <span style="font-weight:700; color:var(--ink);">ИИ-Радар ВВБ</span>
-    <span>· еженедельный радар внедрений ИИ для девяти регионов</span>
+    <span style="font-weight:700; color:var(--ink);">AI-Атлас</span>
+    <span>· еженедельная карта внедрений искусственного интеллекта</span>
   </div>
   «Кейс» — конкретное внедрение у конкретной компании; «Практика» —
   отраслевая практика, обобщённая из нескольких кейсов. Кейсы не устаревают
@@ -424,6 +429,26 @@ footer{margin-top:44px; font-size:.82rem; color:var(--muted);
   <div style="margin-top:10px; font-family:'JetBrains Mono',monospace; font-size:.74rem;">
     Обновление — по субботам · данные только из открытых источников ·
     <a href="#news">новости</a> · <a href="#cases">кейсы</a>
+  </div>
+
+  <div class="legal">
+    <div><b>О проекте.</b> Личный некоммерческий проект частного лица.
+    Не связан ни с одной коммерческой, государственной или иной организацией,
+    не аффилирован с ними, не выражает их позицию и не действует от их имени.
+    Оформление оригинальное; товарные знаки и фирменные обозначения третьих
+    лиц не используются.</div>
+
+    <div><b>Об источниках.</b> Публикуются краткие изложения фактов из
+    открытых публикаций со ссылкой на первоисточник. Сообщения информационного
+    характера о событиях и фактах не являются объектами авторского права
+    (п. 6 ст. 1259 ГК РФ); цитирование выполняется в объёме, оправданном
+    информационной целью (ст. 1274 ГК РФ). Права на оригинальные материалы
+    принадлежат их правообладателям.</div>
+
+    <div><b>Оговорка.</b> Материалы носят справочный характер, публикуются
+    «как есть», без гарантии полноты и точности; автор не несёт
+    ответственности за решения, принятые на их основе. Правообладатель может
+    запросить уточнение или удаление материала.</div>
   </div>
 </footer>
 </div>

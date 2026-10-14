@@ -339,9 +339,9 @@ strong,b{font-weight:700}
 .js.landing .progress,.js.landing .counter,.js.landing .nav,.js.landing .dots,.js.landing .hint,.js.landing .no-js-note{display:none!important}
 .js.landing [data-reveal]{opacity:0;transform:translateY(14px)}
 .js.landing .s.is-active [data-reveal]{opacity:1;transform:none}
-.js.landing .wrap{min-height:calc(100dvh - 2*var(--pad-y))}
-.js.landing .s01 .wrap,.js.landing .s:last-child .wrap{min-height:calc(100dvh - 2*var(--pad-y))}
-@media (max-width:640px){.js.landing .wrap{min-height:auto}}
+.js.landing .wrap{min-height:auto}
+.js.landing .s01 .wrap{min-height:calc(78vh - 2*var(--pad-y))}
+.js.landing .s{padding-top:clamp(64px,9vh,110px);padding-bottom:clamp(64px,9vh,110px)}
 .js.landing .top{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.86);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line-soft);display:flex;align-items:center;justify-content:space-between;padding:12px var(--pad-x);font-size:14px;color:var(--ink-2)}
 .top{display:none}
 .js.landing .top a{color:var(--ink);text-decoration:none;font-weight:500}
@@ -992,6 +992,7 @@ strong,b{font-weight:700}
 (function () {
   'use strict';
   if (!document.documentElement.classList.contains('landing')) return;
+  if (/(^|[?&])static(=|&|$)/.test(location.search)) { document.documentElement.classList.add('static'); document.querySelectorAll('.s').forEach((s) => s.classList.add('is-active')); }
   const slides = Array.from(document.querySelectorAll('.s'));
   const seen = new Set();
   slides.forEach((s, i) => { s.setAttribute('aria-hidden', 'false'); s.dataset.idx = i; });
